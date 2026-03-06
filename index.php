@@ -1,19 +1,31 @@
-<?php
+<?php require_once __DIR__ . '/includes/header.php'; ?>
 
-declare(strict_types=1);
+<body>
 
-require_once __DIR__ . "/includes/config.php";
-require_once __DIR__ . "/includes/functions.php";
-require_once __DIR__ . "/includes/header.php";
-require_once __DIR__ . "/includes/nav.php";
-?>
+<div class="container-fluid p-5 bg-primary text-white text-center">
+  <h1>My First Bootstrap Page</h1>
+  <p>Resize this responsive page to see the effect!</p> 
+</div>
+  
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 3</h3>        
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+  </div>
+</div>
 
-<h1>Welcome to <?= e(APP_NAME) ?></h1>
-<p>Select module:</p>
-<ul>
-    <li><a href="/modules/admin/dashboard.php">Admin Module</a></li>
-    <li><a href="/modules/submit/dashboard.php">Submit Module</a></li>
-    <li><a href="/modules/search/dashboard.php">Search Module</a></li>
-</ul>
-
-<?php require_once __DIR__ . "/includes/footer.php"; ?>
+</body>
+</html>

@@ -12,6 +12,7 @@ This folder is the running presentation record for the project.
 
 - `01_chronology.md`: timeline of the project from the first backend setup until now
 - `02_assignment_alignment.md`: mapping between teacher requirements and current implementation
+- `03_m2_safe_roadmap.md`: future expansion plan that keeps the latest M2 assignment intact
 
 ## Update Rule
 

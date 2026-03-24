@@ -157,6 +157,22 @@ After the backend requirements were covered, the interface was polished to make 
 
 The project now reads more clearly in a demo setting. A teacher can move through the homepage, auth pages, dashboard, and list page and immediately understand what each part of the backend delivers. The code still keeps the same routing, validation, session handling, and security logic as before.
 
+## Phase 11: Roadmap Reconciliation
+
+After the larger project brief for the EEY-style application was reviewed, it became clear that the repository now sits at an important boundary: it satisfies the latest M2 backend assignment, but it does not yet implement the full long-form project vision with Admin, Candidate, Search, and API modules.
+
+### Decision taken
+
+- the second assignment remains the hard constraint
+- the older PDF is treated as long-term product direction
+- future work must extend the current M2 structure instead of replacing it
+
+### Output of this phase
+
+- a roadmap document was added to explain how to evolve the project safely
+- the roadmap keeps `auth/`, `modules/dashboard.php`, and `modules/list.php` intact
+- the next recommended milestone is a domain-specific database redesign that still preserves M2 compliance
+
 ## Current State Summary
 
 At this point, the project includes a full backend authentication flow, a PDO database layer, a required SQL schema and seed, a protected dashboard, and a protected searchable list page. It now matches the core structure and behavior described by the teacher for the second assignment, with compatibility redirects left in place for the original root URLs.

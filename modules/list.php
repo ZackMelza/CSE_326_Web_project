@@ -42,60 +42,74 @@ try {
 }
 ?>
 <?php require_once __DIR__ . '/../includes/header.php'; ?>
-<body class="bg-light">
-<div class="container py-5">
-  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
-    <div>
-      <h1 class="h3 mb-1">Project Content List</h1>
-      <p class="text-muted mb-0">Searchable protected list built with PDO and prepared statements.</p>
-    </div>
-    <div class="d-flex gap-2 flex-wrap">
-      <a class="btn btn-outline-secondary" href="dashboard.php">Dashboard</a>
-      <a class="btn btn-outline-danger" href="../auth/logout.php">Logout</a>
-    </div>
-  </div>
-
-  <div class="card shadow-sm mb-4">
-    <div class="card-body">
-      <form method="get" action="list.php" class="row g-3 align-items-end">
-        <div class="col-md-9">
-          <label for="keyword" class="form-label">Keyword Search</label>
-          <input
-            id="keyword"
-            name="keyword"
-            type="text"
-            class="form-control"
-            placeholder="Search by title, category, or summary"
-            value="<?= e($keyword) ?>"
-          >
+<body>
+<div class="app-shell">
+  <div class="app-frame">
+    <div class="project-topbar">
+      <div class="brand-mark">
+        <div class="brand-badge">LS</div>
+        <div class="brand-copy">
+          <span class="brand-eyebrow">Protected Search</span>
+          <span class="brand-title">Project Content List</span>
         </div>
-        <div class="col-md-3 d-grid">
-          <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-      </form>
+      </div>
+      <div class="topbar-links">
+        <a class="topbar-link" href="dashboard.php">Dashboard</a>
+        <a class="topbar-link" href="../index.php">Home</a>
+        <a class="topbar-link" href="../auth/logout.php">Logout</a>
+      </div>
     </div>
-  </div>
 
-  <?php if (isset($loadError)): ?>
-    <div class="alert alert-danger"><?= e($loadError) ?></div>
-  <?php elseif ($posts === []): ?>
-    <div class="alert alert-secondary">No matching records were found.</div>
-  <?php else: ?>
-    <div class="row g-4">
-      <?php foreach ($posts as $post): ?>
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <span class="badge text-bg-primary mb-2"><?= e((string) $post['category']) ?></span>
-              <h2 class="h5"><?= e((string) $post['title']) ?></h2>
-              <p class="text-muted small mb-2">Created by <?= e((string) $post['username']) ?></p>
-              <p class="mb-0"><?= e((string) $post['summary']) ?></p>
-            </div>
+    <div class="search-layout">
+      <section class="page-panel search-panel hero-card">
+        <span class="hero-kicker">List Deliverable</span>
+        <div class="row g-4 align-items-end">
+          <div class="col-lg-7">
+            <h1 class="hero-title mb-3">Search project content using a bookmarkable keyword filter.</h1>
+            <p class="hero-copy mb-0">
+              This page queries the thematic `posts` table with PDO prepared statements and keeps
+              the search in the URL through the `GET` method, exactly as required by the assignment.
+            </p>
+          </div>
+          <div class="col-lg-5">
+            <form method="get" action="list.php" class="row g-3 align-items-end">
+              <div class="col-12">
+                <label for="keyword" class="form-label">Keyword Search</label>
+                <input
+                  id="keyword"
+                  name="keyword"
+                  type="text"
+                  class="form-control"
+                  placeholder="Search by title, category, or summary"
+                  value="<?= e($keyword) ?>"
+                >
+              </div>
+              <div class="col-12 d-grid">
+                <button type="submit" class="btn btn-primary">Search</button>
+              </div>
+            </form>
           </div>
         </div>
-      <?php endforeach; ?>
+      </section>
+
+      <?php if (isset($loadError)): ?>
+        <div class="alert alert-danger"><?= e($loadError) ?></div>
+      <?php elseif ($posts === []): ?>
+        <div class="alert alert-secondary">No matching records were found.</div>
+      <?php else: ?>
+        <div class="results-grid">
+          <?php foreach ($posts as $post): ?>
+            <article class="soft-card result-card">
+              <span class="badge text-bg-primary mb-3"><?= e((string) $post['category']) ?></span>
+              <h2 class="h4 mb-2"><?= e((string) $post['title']) ?></h2>
+              <p class="result-meta mb-3">Created by <?= e((string) $post['username']) ?></p>
+              <p class="mb-0"><?= e((string) $post['summary']) ?></p>
+            </article>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
     </div>
-  <?php endif; ?>
+  </div>
 </div>
 </body>
 </html>

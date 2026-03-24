@@ -40,42 +40,99 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <?php require_once __DIR__ . '/../includes/header.php'; ?>
-<body class="bg-light">
-<div class="container py-5" style="max-width: 580px;">
-  <div class="card shadow-sm">
-    <div class="card-body p-4">
-      <h1 class="h3 mb-3">Login</h1>
-
-      <?php if ($registered): ?>
-        <div class="alert alert-success">Registration completed. You can now sign in.</div>
-      <?php endif; ?>
-
-      <?php if ($errors !== []): ?>
-        <div class="alert alert-danger">
-          <ul class="mb-0">
-            <?php foreach ($errors as $error): ?>
-              <li><?= e($error) ?></li>
-            <?php endforeach; ?>
-          </ul>
+<body>
+<div class="app-shell">
+  <div class="app-frame">
+    <div class="project-topbar">
+      <div class="brand-mark">
+        <div class="brand-badge">M2</div>
+        <div class="brand-copy">
+          <span class="brand-eyebrow">CSE 326 Backend</span>
+          <span class="brand-title">Authentication Portal</span>
         </div>
-      <?php endif; ?>
+      </div>
+      <div class="topbar-links">
+        <a class="topbar-link" href="../index.php">Home</a>
+        <a class="topbar-link" href="register.php">Register</a>
+      </div>
+    </div>
 
-      <form method="post" action="login.php" novalidate>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input id="email" name="email" type="email" class="form-control" value="<?= e($email) ?>" required>
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input id="password" name="password" type="password" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Login</button>
-      </form>
+    <div class="page-panel auth-layout">
+      <section class="auth-showcase">
+        <span class="section-label">Protected Entry</span>
+        <h1 class="hero-title">Sign in to the dashboard and searchable project content.</h1>
+        <p class="hero-copy">
+          Logging in creates the PHP session used to access the protected dashboard and the
+          assignment list page. The authentication check stays server-side, not just visual.
+        </p>
 
-      <p class="mt-3 mb-0">
-        Need an account?
-        <a href="register.php">Register here</a>
-      </p>
+        <div class="feature-strip">
+          <div class="feature-chip">
+            <strong>Sessions</strong>
+            <span>Authenticated users get role and username in session state.</span>
+          </div>
+          <div class="feature-chip">
+            <strong>Guards</strong>
+            <span>Dashboard and list pages block anonymous access.</span>
+          </div>
+          <div class="feature-chip">
+            <strong>Search</strong>
+            <span>The protected list page supports bookmarkable keyword filters.</span>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric-box">
+            <strong>2</strong>
+            <span>protected areas unlocked after authentication</span>
+          </div>
+          <div class="metric-box">
+            <strong>0</strong>
+            <span>plain-text passwords stored in the database</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="auth-form-wrap">
+        <div class="card auth-card hero-card">
+          <div class="card-body p-4 p-lg-5">
+            <span class="hero-kicker">Login</span>
+            <h2 class="h2 mb-3">Welcome Back</h2>
+            <p class="muted-note mb-4">Sign in with the email and password stored in the database.</p>
+
+            <?php if ($registered): ?>
+              <div class="alert alert-success">Registration completed. You can now sign in.</div>
+            <?php endif; ?>
+
+            <?php if ($errors !== []): ?>
+              <div class="alert alert-danger">
+                <ul class="mb-0">
+                  <?php foreach ($errors as $error): ?>
+                    <li><?= e($error) ?></li>
+                  <?php endforeach; ?>
+                </ul>
+              </div>
+            <?php endif; ?>
+
+            <form method="post" action="login.php" novalidate>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" name="email" type="email" class="form-control" value="<?= e($email) ?>" required>
+              </div>
+              <div class="mb-4">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" name="password" type="password" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+
+            <p class="mt-4 mb-0 muted-note">
+              Need an account?
+              <a href="register.php">Register here</a>
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </div>

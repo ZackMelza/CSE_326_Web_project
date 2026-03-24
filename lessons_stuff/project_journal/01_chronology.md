@@ -140,6 +140,23 @@ During testing, importing `database/seed.sql` into an older local database faile
 
 This makes the SQL setup more robust for future development. A local database created before the PDO refactor can now be brought up to date without forcing a full database drop every time.
 
+## Phase 10: Teacher-Safe UI Polish
+
+After the backend requirements were covered, the interface was polished to make the project easier to present and more professional to review. The goal was not to redesign the flow or introduce unnecessary frontend complexity. The goal was to improve clarity, consistency, and visual quality while preserving the assignment-compliant backend behavior.
+
+### Visual changes applied
+
+- a shared visual system was added through `assests/css/styles.css`
+- `includes/header.php` now loads the shared stylesheet and a stronger font
+- `auth/register.php` and `auth/login.php` were redesigned with a split layout that explains the security flow
+- `modules/dashboard.php` was upgraded into a clearer protected landing page
+- `modules/list.php` was restyled into a cleaner search-and-results experience
+- `index.php` was refreshed so the home page better communicates the project deliverables
+
+### Why this matters
+
+The project now reads more clearly in a demo setting. A teacher can move through the homepage, auth pages, dashboard, and list page and immediately understand what each part of the backend delivers. The code still keeps the same routing, validation, session handling, and security logic as before.
+
 ## Current State Summary
 
 At this point, the project includes a full backend authentication flow, a PDO database layer, a required SQL schema and seed, a protected dashboard, and a protected searchable list page. It now matches the core structure and behavior described by the teacher for the second assignment, with compatibility redirects left in place for the original root URLs.

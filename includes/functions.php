@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/config.php';
-
 function redirect(string $url): never
 {
     header("Location: {$url}");
@@ -14,29 +12,15 @@ function is_logged_in(): bool
     return isset($_SESSION['user_id']);
 }
 
-function login_user(int $id, string $username, string $email): void
+function require_auth(): void
 {
-    $_SESSION['user_id'] = $id;
-    $_SESSION['username'] = $username;
-    $_SESSION['email'] = $email;
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: ../auth/login.php');
+        exit;
+    }
 }
 
-function logout_user(): void
+function e(string $value): string
 {
-    $_SESSION = [];
-
-    if (ini_get('session.use_cookies')) {
-        $params = session_get_cookie_params();
-        setcookie(
-            session_name(),
-            '',
-            time() - 42000,
-            $params['path'],
-            $params['domain'],
-            $params['secure'],
-            $params['httponly']
-        );
-    }
-
-    session_destroy();
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }

@@ -1,1 +1,5 @@
-lessons_stuff
+lessons_stuff/*
+!lessons_stuff/project_journal/
+!lessons_stuff/project_journal/README.md
+!lessons_stuff/project_journal/01_chronology.md
+!lessons_stuff/project_journal/02_assignment_alignment.md

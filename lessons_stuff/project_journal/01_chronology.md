@@ -183,6 +183,16 @@ Before further feature work, a small quality pass was made on `modules/dashboard
 - reduces avoidable confusion during code review or presentation
 - improves submission quality without changing functionality
 
+## Phase 13: Repository Hygiene
+
+A local `.codex` path appeared as an untracked file in the repository. Since it is tool-local metadata and not part of the coursework deliverables, it was added to `.gitignore` so it does not pollute `git status` or accidentally get committed later.
+
+### Why this mattered
+
+- keeps the repository clean and focused on project files
+- reduces noise while reviewing pending changes
+- prevents accidental commits of local tooling data
+
 ## Current State Summary
 
 At this point, the project includes a full backend authentication flow, a PDO database layer, a required SQL schema and seed, a protected dashboard, and a protected searchable list page. It now matches the core structure and behavior described by the teacher for the second assignment, with compatibility redirects left in place for the original root URLs.

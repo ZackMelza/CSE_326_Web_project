@@ -1,3 +1,4 @@
+.codex
 lessons_stuff/*
 !lessons_stuff/project_journal/
 !lessons_stuff/project_journal/README.md

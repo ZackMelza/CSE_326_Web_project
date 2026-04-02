@@ -173,6 +173,16 @@ After the larger project brief for the EEY-style application was reviewed, it be
 - the roadmap keeps `auth/`, `modules/dashboard.php`, and `modules/list.php` intact
 - the next recommended milestone is a domain-specific database redesign that still preserves M2 compliance
 
+## Phase 12: Submission Cleanup
+
+Before further feature work, a small quality pass was made on `modules/dashboard.php` to remove duplicated trailing HTML markup left behind from an earlier UI refactor. The backend logic was already correct, but the extra closing block was unnecessary noise and could make the file look careless during review.
+
+### Why this mattered
+
+- keeps the protected dashboard file clean and easier to explain
+- reduces avoidable confusion during code review or presentation
+- improves submission quality without changing functionality
+
 ## Current State Summary
 
 At this point, the project includes a full backend authentication flow, a PDO database layer, a required SQL schema and seed, a protected dashboard, and a protected searchable list page. It now matches the core structure and behavior described by the teacher for the second assignment, with compatibility redirects left in place for the original root URLs.

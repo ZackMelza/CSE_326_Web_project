@@ -1,4 +1,10 @@
-# CSE_326_Web_project
+# CSE_326 Web Project
+
+## Overview
+
+This project is a PHP and MariaDB web application built for the CSE 326 coursework. The current implementation focuses on the latest M2 backend assignment requirements: secure authentication with PHP sessions, a PDO-based database layer, a protected dashboard, and a searchable list page.
+
+Longer term, the project is intended to evolve toward a broader appointment-list tracking system inspired by the EEY workflow, but that future direction is being developed without breaking the latest graded assignment deliverables.
 
 ## Team
 
@@ -6,39 +12,16 @@
 
 ## Ownership
 
-- Zacharias Melauin: authentication flow, database setup, protected pages, search list, and project documentation
+- Zacharias Melauin: authentication flow, database setup, protected pages, search list, UI polish, and project documentation
 
-## Assignment Structure
+## Current Features
 
-```text
-project-root/
-├── auth/
-│   ├── login.php
-│   ├── logout.php
-│   └── register.php
-├── database/
-│   ├── schema.sql
-│   └── seed.sql
-├── includes/
-│   ├── db.php
-│   ├── functions.php
-│   └── header.php
-├── lessons_stuff/
-│   ├── 2nd_aasigment
-│   └── project_journal/
-├── modules/
-│   ├── dashboard.php
-│   └── list.php
-└── README.md
-```
-
-## Features
-
-- Secure register, login, and logout flow
-- Password hashing with `password_hash()` and verification with `password_verify()`
+- secure register, login, and logout flow
+- password hashing with `password_hash()` and verification with `password_verify()`
+- PHP session-based access control
 - PDO connection with prepared statements
-- Protected dashboard page with session guard
-- Protected `list.php` with keyword search through `GET`
+- protected dashboard page with session guard
+- protected `list.php` with keyword search through `GET`
 - SQL schema plus demo seed data
 
 ## Database Design
@@ -57,6 +40,15 @@ project-root/
 - thematic table for project content
 - linked to `users.id` through a foreign key
 - searchable in `modules/list.php`
+
+## Main Routes
+
+- `/`
+- `/auth/register.php`
+- `/auth/login.php`
+- `/auth/logout.php`
+- `/modules/dashboard.php`
+- `/modules/list.php`
 
 ## Installation
 
@@ -138,11 +130,35 @@ Emails:
 - `writer@example.com`
 - `viewer@example.com`
 
-## Main Routes
+## M2 Submission Notes
 
-- `/`
-- `/auth/register.php`
-- `/auth/login.php`
-- `/auth/logout.php`
-- `/modules/dashboard.php`
-- `/modules/list.php`
+The latest graded target is the second assignment, so the repository keeps the required M2 backend structure and deliverables intact.
+
+### M2 Required Structure
+
+```text
+project-root/
+├── auth/
+│   ├── login.php
+│   ├── logout.php
+│   └── register.php
+├── database/
+│   ├── schema.sql
+│   └── seed.sql
+├── includes/
+│   ├── db.php
+│   ├── functions.php
+│   └── header.php
+├── modules/
+│   ├── dashboard.php
+│   └── list.php
+└── README.md
+```
+
+### M2 Deliverables Covered
+
+- secure PDO connection in `includes/db.php`
+- register, login, logout, and session guard
+- protected `modules/dashboard.php`
+- functional `modules/list.php` with keyword search
+- README with student information, ownership, and setup instructions

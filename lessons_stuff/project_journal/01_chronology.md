@@ -193,6 +193,22 @@ A local `.codex` path appeared as an untracked file in the repository. Since it 
 - reduces noise while reviewing pending changes
 - prevents accidental commits of local tooling data
 
+## Phase 14: README Restructure
+
+The project README was reorganized so it reads like a project document first and a submission checklist second. The original README leaned too hard into the assignment structure right from the top. That is useful for grading, but it is not the best first impression for a human reader trying to understand what the project actually is.
+
+### What changed
+
+- the README now starts with project overview, features, routes, database design, and installation
+- the M2-required structure was kept, but moved into a dedicated submission section lower in the document
+- the new structure keeps grading visibility without making the whole README feel like a checklist
+
+### Why this mattered
+
+- improves readability for both teachers and collaborators
+- keeps the repository looking like a real project, not only an assignment shell
+- preserves the latest M2 compliance information in a cleaner format
+
 ## Current State Summary
 
 At this point, the project includes a full backend authentication flow, a PDO database layer, a required SQL schema and seed, a protected dashboard, and a protected searchable list page. It now matches the core structure and behavior described by the teacher for the second assignment, with compatibility redirects left in place for the original root URLs.

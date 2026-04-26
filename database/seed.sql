@@ -1,9 +1,9 @@
 USE cse326_auth;
 
-INSERT INTO users (id, username, email, password_hash, role) VALUES
-  (1, 'zack_admin', 'admin@example.com', '$2y$12$yfy/xs2MkIfc5rAGigx5dOBeqo1di6GN4KR9sjxDhjKn8Oh5M/UjK', 'admin'),
-  (2, 'demo_writer', 'writer@example.com', '$2y$12$yfy/xs2MkIfc5rAGigx5dOBeqo1di6GN4KR9sjxDhjKn8Oh5M/UjK', 'member'),
-  (3, 'demo_viewer', 'viewer@example.com', '$2y$12$yfy/xs2MkIfc5rAGigx5dOBeqo1di6GN4KR9sjxDhjKn8Oh5M/UjK', 'member')
+INSERT INTO users (username, email, password_hash, role) VALUES
+  ('zack_admin', 'admin@example.com', '$2y$12$yfy/xs2MkIfc5rAGigx5dOBeqo1di6GN4KR9sjxDhjKn8Oh5M/UjK', 'admin'),
+  ('demo_writer', 'writer@example.com', '$2y$12$yfy/xs2MkIfc5rAGigx5dOBeqo1di6GN4KR9sjxDhjKn8Oh5M/UjK', 'member'),
+  ('demo_viewer', 'viewer@example.com', '$2y$12$yfy/xs2MkIfc5rAGigx5dOBeqo1di6GN4KR9sjxDhjKn8Oh5M/UjK', 'member')
 ON DUPLICATE KEY UPDATE
   username = VALUES(username),
   email = VALUES(email),
@@ -55,9 +55,9 @@ ON DUPLICATE KEY UPDATE
   notes = VALUES(notes);
 
 INSERT INTO tracked_candidates (id, user_id, candidate_id, label, is_active) VALUES
-  (1, 2, 1, 'High priority profile', 1),
-  (2, 2, 3, 'Awaiting review outcome', 1),
-  (3, 3, 2, 'Follow for shortlist updates', 1)
+  (1, (SELECT id FROM users WHERE email = 'writer@example.com'), 1, 'High priority profile', 1),
+  (2, (SELECT id FROM users WHERE email = 'writer@example.com'), 3, 'Awaiting review outcome', 1),
+  (3, (SELECT id FROM users WHERE email = 'viewer@example.com'), 2, 'Follow for shortlist updates', 1)
 ON DUPLICATE KEY UPDATE
   user_id = VALUES(user_id),
   candidate_id = VALUES(candidate_id),
@@ -65,11 +65,11 @@ ON DUPLICATE KEY UPDATE
   is_active = VALUES(is_active);
 
 INSERT INTO audit_logs (id, user_id, action, entity_type, entity_id) VALUES
-  (1, 1, 'seed', 'specialty', 1),
-  (2, 1, 'seed', 'appointment_list', 1),
-  (3, 1, 'seed', 'candidate', 1),
-  (4, 1, 'seed', 'candidate_list_entry', 1),
-  (5, 2, 'seed', 'tracked_candidate', 1)
+  (1, (SELECT id FROM users WHERE email = 'admin@example.com'), 'seed', 'specialty', 1),
+  (2, (SELECT id FROM users WHERE email = 'admin@example.com'), 'seed', 'appointment_list', 1),
+  (3, (SELECT id FROM users WHERE email = 'admin@example.com'), 'seed', 'candidate', 1),
+  (4, (SELECT id FROM users WHERE email = 'admin@example.com'), 'seed', 'candidate_list_entry', 1),
+  (5, (SELECT id FROM users WHERE email = 'writer@example.com'), 'seed', 'tracked_candidate', 1)
 ON DUPLICATE KEY UPDATE
   action = VALUES(action),
   entity_type = VALUES(entity_type),

@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../includes/functions.php';
 
 require_auth();
 
+$loadError = null;
 $pdo = db();
 $errors = [];
 
@@ -42,17 +43,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $flash = get_flash();
-$candidates = $pdo->query('SELECT id, first_name, last_name FROM candidates ORDER BY last_name, first_name')->fetchAll();
-$tracked = $pdo->prepare(
-    'SELECT tracked_candidates.id, tracked_candidates.label, tracked_candidates.is_active,
-            candidates.first_name, candidates.last_name, candidates.city
-     FROM tracked_candidates
-     INNER JOIN candidates ON candidates.id = tracked_candidates.candidate_id
-     WHERE tracked_candidates.user_id = :user_id
-     ORDER BY tracked_candidates.created_at DESC'
-);
-$tracked->execute(['user_id' => current_user_id()]);
-$trackedCandidates = $tracked->fetchAll();
+
+try {
+    $candidates = $pdo->query('SELECT id, first_name, last_name FROM candidates ORDER BY last_name, first_name')->fetchAll();
+    $tracked = $pdo->prepare(
+        'SELECT tracked_candidates.id, tracked_candidates.label, tracked_candidates.is_active,
+                candidates.first_name, candidates.last_name, candidates.city
+         FROM tracked_candidates
+         INNER JOIN candidates ON candidates.id = tracked_candidates.candidate_id
+         WHERE tracked_candidates.user_id = :user_id
+         ORDER BY tracked_candidates.created_at DESC'
+    );
+    $tracked->execute(['user_id' => current_user_id()]);
+    $trackedCandidates = $tracked->fetchAll();
+} catch (Throwable $exception) {
+    $candidates = [];
+    $trackedCandidates = [];
+    $loadError = 'Candidate tracking is not available until the updated database schema and seed data are imported.';
+}
 ?>
 <?php require_once __DIR__ . '/../../includes/header.php'; ?>
 <body>
@@ -82,6 +90,11 @@ $trackedCandidates = $tracked->fetchAll();
     <?php if ($errors !== []): ?>
       <div class="alert alert-danger mb-4"><?= e(implode(' ', $errors)) ?></div>
     <?php endif; ?>
+    <?php if ($loadError !== null): ?>
+      <div class="alert alert-danger mb-4">
+        <?= e($loadError) ?>
+      </div>
+    <?php endif; ?>
 
     <div class="crud-layout">
       <section class="page-panel dashboard-hero">
@@ -103,7 +116,7 @@ $trackedCandidates = $tracked->fetchAll();
             <input id="label" name="label" class="form-control" placeholder="High priority, waiting for review, etc." required>
           </div>
           <div class="col-12">
-            <button type="submit" name="action" value="save" class="btn btn-primary">Save Tracking Entry</button>
+            <button type="submit" name="action" value="save" class="btn btn-primary" <?= $loadError !== null ? 'disabled' : '' ?>>Save Tracking Entry</button>
           </div>
         </form>
       </section>

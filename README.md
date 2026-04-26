@@ -2,9 +2,7 @@
 
 ## Overview
 
-This project is a PHP and MariaDB web application built for the CSE 326 coursework. The current implementation focuses on the latest M2 backend assignment requirements: secure authentication with PHP sessions, a PDO-based database layer, a protected dashboard, and a searchable list page.
-
-Longer term, the project is intended to evolve toward a broader appointment-list tracking system inspired by the EEY workflow, but that future direction is being developed without breaking the latest graded assignment deliverables.
+This repository is now a small PHP and MariaDB appointment-tracking application built for the CSE 326 coursework. It extends the earlier M2 authentication submission into a broader project that matches the screenshot checklist: a relational MySQL schema, role-based sessions, CRUD for four entities, a responsive UI, and JSON API endpoints with a Postman collection.
 
 ## Team
 
@@ -12,43 +10,55 @@ Longer term, the project is intended to evolve toward a broader appointment-list
 
 ## Ownership
 
-- Zacharias Melauin: authentication flow, database setup, protected pages, search list, UI polish, and project documentation
+- Zacharias Melauin: schema design, authentication flow, session guards, CRUD modules, search module, API endpoints, Postman collection, UI polish, README, and project journal
 
-## Current Features
+## Checklist Coverage
 
-- secure register, login, and logout flow
-- password hashing with `password_hash()` and verification with `password_verify()`
-- PHP session-based access control
-- PDO connection with prepared statements
-- protected dashboard page with session guard
-- protected `list.php` with keyword search through `GET`
-- SQL schema plus demo seed data
+- MySQL relational database with 7 tables and foreign-key relations
+- Full CRUD for 4 entities: `specialties`, `appointment_lists`, `candidates`, `candidate_list_entries`
+- 6 JSON API endpoints under `api/`
+- Login and session handling with 2 roles: `admin` and `member`
+- Responsive UI for landing, dashboard, search, tracking, and admin screens
+- README plus updated project journal in `lessons_stuff/project_journal/`
 
 ## Database Design
 
-### `users`
+The main schema is defined in [database/schema.sql](/srv/http/webeng/CSE_326_Web_project/database/schema.sql:1).
 
-- `id`
-- `username`
-- `email`
-- `password_hash`
-- `role`
-- `created_at`
+### Tables
 
-### `posts`
+- `users`: authentication accounts with `role`
+- `specialties`: specialty codes and sectors
+- `appointment_lists`: yearly lists linked to a specialty
+- `candidates`: candidate profile records
+- `candidate_list_entries`: ranked entries linking candidates to lists
+- `tracked_candidates`: user-specific watchlist records
+- `audit_logs`: simple audit trail for admin CRUD actions
 
-- thematic table for project content
-- linked to `users.id` through a foreign key
-- searchable in `modules/list.php`
+## Main Screens
 
-## Main Routes
+- `/index.php` landing page and module selector
+- `/auth/register.php` register
+- `/auth/login.php` login
+- `/modules/dashboard.php` protected user dashboard
+- `/modules/list.php` protected candidate search and filter page
+- `/modules/tracking/dashboard.php` member tracking CRUD
+- `/modules/admin/dashboard.php` admin hub
+- `/modules/specialties/dashboard.php` specialty CRUD
+- `/modules/lists/dashboard.php` appointment list CRUD
+- `/modules/candidates/dashboard.php` candidate CRUD
+- `/modules/entries/dashboard.php` candidate entry CRUD
 
-- `/`
-- `/auth/register.php`
-- `/auth/login.php`
-- `/auth/logout.php`
-- `/modules/dashboard.php`
-- `/modules/list.php`
+## API Endpoints
+
+- `/api/stats/index.php`
+- `/api/specialties/index.php`
+- `/api/lists/index.php`
+- `/api/candidates/index.php`
+- `/api/entries/index.php`
+- `/api/search/index.php`
+
+The Postman collection is stored in [postman/CSE_326_Web_project.postman_collection.json](/srv/http/webeng/CSE_326_Web_project/postman/CSE_326_Web_project.postman_collection.json:1).
 
 ## Installation
 
@@ -66,12 +76,12 @@ Debian/Ubuntu:
 
 ```bash
 sudo apt update
-sudo apt install apache2 libapache2-mod-php php mariadb-server
+sudo apt install apache2 libapache2-mod-php php php-mysql mariadb-server
 sudo systemctl enable --now apache2
 sudo systemctl enable --now mariadb
 ```
 
-### 2. Enable MySQL support in PHP
+### 2. Ensure PHP MySQL support is enabled
 
 Arch Linux:
 
@@ -84,13 +94,12 @@ sudo systemctl restart httpd
 Debian/Ubuntu:
 
 ```bash
-sudo apt install php-mysql
 sudo systemctl restart apache2
 ```
 
 ### 3. Set Apache `DocumentRoot`
 
-Set Apache to serve:
+Serve this directory:
 
 `/srv/http/webeng/CSE_326_Web_project`
 
@@ -108,7 +117,7 @@ sudo mariadb cse326_auth < /srv/http/webeng/CSE_326_Web_project/database/seed.sq
 
 ### 5. Optional Environment Variables
 
-The app defaults to:
+Defaults are defined in `includes/db.php`:
 
 - `DB_HOST=localhost`
 - `DB_PORT=3306`
@@ -116,49 +125,16 @@ The app defaults to:
 - `DB_USER=cse326_user`
 - `DB_PASS=StrongPass123!`
 
-You can override them through Apache or shell environment variables.
-
 ## Demo Accounts
 
-All seeded demo users use:
+All seeded users use password `Password123!`.
 
-- Password: `Password123!`
+- `admin@example.com` -> role `admin`
+- `writer@example.com` -> role `member`
+- `viewer@example.com` -> role `member`
 
-Emails:
+## Notes
 
-- `admin@example.com`
-- `writer@example.com`
-- `viewer@example.com`
-
-## M2 Submission Notes
-
-The latest graded target is the second assignment, so the repository keeps the required M2 backend structure and deliverables intact.
-
-### M2 Required Structure
-
-```text
-project-root/
-├── auth/
-│   ├── login.php
-│   ├── logout.php
-│   └── register.php
-├── database/
-│   ├── schema.sql
-│   └── seed.sql
-├── includes/
-│   ├── db.php
-│   ├── functions.php
-│   └── header.php
-├── modules/
-│   ├── dashboard.php
-│   └── list.php
-└── README.md
-```
-
-### M2 Deliverables Covered
-
-- secure PDO connection in `includes/db.php`
-- register, login, logout, and session guard
-- protected `modules/dashboard.php`
-- functional `modules/list.php` with keyword search
-- README with student information, ownership, and setup instructions
+- The root `login.php`, `register.php`, and `logout.php` files remain as compatibility redirects.
+- The old M2 coursework routes still exist, but now point into a richer domain model.
+- The project journal documents the transition from the smaller auth submission to the current checklist-complete version.

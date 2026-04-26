@@ -2,6 +2,48 @@
 
 This file maps the teacher instructions from `lessons_stuff/2nd_aasigment` to the current implementation.
 
+## Screenshot Checklist Audit (2026-04-24)
+
+### Required
+
+- MySQL database with at least 6 to 7 tables and relations
+- full CRUD for 4 basic entities
+- 5 to 6 API endpoints with Postman demo
+- login and session handling with at least 2 roles
+- clean and responsive UI
+- GitHub repository plus README
+
+### Current implementation
+
+- `database/schema.sql` now defines 7 related tables:
+- `users`
+- `specialties`
+- `appointment_lists`
+- `candidates`
+- `candidate_list_entries`
+- `tracked_candidates`
+- `audit_logs`
+- CRUD is implemented in:
+- `modules/specialties/dashboard.php`
+- `modules/lists/dashboard.php`
+- `modules/candidates/dashboard.php`
+- `modules/entries/dashboard.php`
+- JSON API endpoints are implemented in:
+- `api/stats/index.php`
+- `api/specialties/index.php`
+- `api/lists/index.php`
+- `api/candidates/index.php`
+- `api/entries/index.php`
+- `api/search/index.php`
+- the Postman collection lives in `postman/CSE_326_Web_project.postman_collection.json`
+- `auth/login.php` still provides session login with `admin` and `member` roles
+- the UI remains shared through `assests/css/styles.css` and responsive layouts
+- `README.md` documents setup, accounts, routes, schema, and API coverage
+
+### Current status
+
+- implemented
+
 ## Repository Structure
 
 ### Required

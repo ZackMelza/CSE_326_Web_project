@@ -373,6 +373,10 @@ a:hover {
   gap: 18px;
 }
 
+.compact-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
 .result-card {
   padding: 24px;
   position: relative;
@@ -428,9 +432,44 @@ a:hover {
   color: #54473d;
 }
 
+.crud-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+  gap: 18px;
+}
+
+.app-table {
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+.app-table th {
+  color: var(--muted);
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.app-table td,
+.app-table th {
+  padding: 1rem 0.9rem;
+  background: transparent;
+}
+
+.table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.inline-form {
+  display: inline-flex;
+}
+
 @media (max-width: 992px) {
   .auth-layout,
-  .dashboard-grid {
+  .dashboard-grid,
+  .crud-layout {
     grid-template-columns: 1fr;
   }
 

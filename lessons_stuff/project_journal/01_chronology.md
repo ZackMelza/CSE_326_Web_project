@@ -209,6 +209,36 @@ The project README was reorganized so it reads like a project document first and
 - keeps the repository looking like a real project, not only an assignment shell
 - preserves the latest M2 compliance information in a cleaner format
 
+## Phase 15: Screenshot Checklist Expansion (2026-04-24)
+
+After reviewing the screenshot checklist, it was clear that the repository still looked like an M2-only backend submission. It had working authentication, sessions, and a protected search page, but it did not yet prove the broader project expectations: 6 to 7 related database tables, CRUD for 4 entities, API endpoints, and an application structure that could be demonstrated beyond login and search.
+
+### What changed in this phase
+
+- `database/schema.sql` was redesigned from a 2-table model into a 7-table relational schema
+- `database/seed.sql` was rewritten with specialty, list, candidate, entry, tracking, and audit demo data
+- the landing page `index.php` became a module selector for Search, Tracking, and Admin
+- `modules/dashboard.php` was turned into a role-aware user dashboard
+- `modules/list.php` was upgraded from generic post search into appointment-list candidate search
+- `modules/admin/dashboard.php` became an admin-only CRUD hub
+- new CRUD dashboards were added for:
+- `modules/specialties/dashboard.php`
+- `modules/lists/dashboard.php`
+- `modules/candidates/dashboard.php`
+- `modules/entries/dashboard.php`
+- a member tracking page was added at `modules/tracking/dashboard.php`
+- 6 JSON endpoints were added under `api/`
+- a Postman collection was added in `postman/`
+- `README.md` and the project journal were updated to describe the new scope
+
+### Why this mattered
+
+- the repository now matches the screenshot requirements much more directly
+- the database model is no longer just auth plus one thematic table
+- CRUD is demonstrated in real admin screens instead of being implied
+- the API requirement now has both endpoint files and a demo collection
+- the UI remains responsive while covering more functionality
+
 ## Current State Summary
 
 At this point, the project includes a full backend authentication flow, a PDO database layer, a required SQL schema and seed, a protected dashboard, and a protected searchable list page. It now matches the core structure and behavior described by the teacher for the second assignment, with compatibility redirects left in place for the original root URLs.

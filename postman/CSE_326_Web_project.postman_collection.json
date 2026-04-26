@@ -1,0 +1,78 @@
+{
+  "info": {
+    "name": "CSE_326 Web Project",
+    "_postman_id": "cse326-web-project-demo",
+    "description": "Demo collection for the PHP appointment tracking project API endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/CSE_326_Web_project"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Stats",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/stats/index.php"
+      }
+    },
+    {
+      "name": "Get Specialties",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/specialties/index.php"
+      }
+    },
+    {
+      "name": "Get Appointment Lists",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/lists/index.php"
+      }
+    },
+    {
+      "name": "Get Candidates",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/candidates/index.php"
+      }
+    },
+    {
+      "name": "Get Ranked Entries",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/entries/index.php"
+      }
+    },
+    {
+      "name": "Search Entries",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/search/index.php?q=maria&status=active",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "search",
+            "index.php"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "maria"
+            },
+            {
+              "key": "status",
+              "value": "active"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
